@@ -64,7 +64,6 @@ AVL<T>::AVL()
   root = nullptr;
 }
 
-
 template <class T>
 void AVL<T>::clear(Node<T> *p)
 {
@@ -237,8 +236,9 @@ void AVL<T>::callPreorder()
   cout << std::endl;
 }
 
-int main() {
-  cout << "Arbol AVL"<<endl;
+int main()
+{
+  cout << "Arbol AVL" << endl;
   AVL<int> avl;
 
   avl.insert(10);
@@ -249,7 +249,4 @@ int main() {
   avl.insert(25);
 
   avl.callPreorder();
-
-
-
 }
