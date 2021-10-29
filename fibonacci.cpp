@@ -5,7 +5,7 @@ using namespace std;
 int fibonacci_compute(int x){
     //base
     if(x<=1) return 1;
-    //induccion 
+    //induccion
     return fibonacci_compute(x-1)+fibonacci_compute(x-2); // usa induccion (no recomendado para numeros grandes)
 }
 
@@ -23,4 +23,3 @@ int main()
 
     return 0;
 }
-

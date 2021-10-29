@@ -6,8 +6,7 @@
 
 using namespace std;
 
-template <class T>
-class maxHeapTree
+template <class T> class maxHeapTree
 {
 public:
   vector<pair<T, int>> heapArr;

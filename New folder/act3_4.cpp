@@ -12,10 +12,10 @@ template <class T>
 class Node
 {
 public:
-  T data;
-  int key;
-  Node<T> *left;
-  Node<T> *right;
+  T data;         // Información del objeto
+  int key;        // Clave del valor
+  Node<T> *left;  // Puntero al elemento del nodo izquierdo
+  Node<T> *right; // Puntero al elemento de nodo derecho
 
   Node(T new_data, int key, Node<T> *left, Node<T> *right)
   {
@@ -66,7 +66,7 @@ public:
 
   void insert(Node<T> *current_node, Node<T> *node_insert)
   {
-    // Go to the next node according to the rules;
+    // Pasa siguiente nodo de acuerdo con las reglas
     Node<T> *next_node = current_node->left;
     bool is_left = true;
     if (node_insert->key > current_node->key)
@@ -77,17 +77,17 @@ public:
 
     if (next_node)
     {
-      // If exist the next node then, we go for the next
+      // Si existe el siguiente nodo, pasa al siguiente
       this->insert(next_node, node_insert);
     }
     else if (is_left)
     {
-      // If the node doesn't exist and the node is in the left then we insert in the left side
+      // Si el nodo no existe y el nodo está a la izquierda, se inserta en el lado izquierdo.
       current_node->left = node_insert;
     }
     else
     {
-      // If the node doesn't exist and the node is in the left then we insert in the left side
+      // Si el nodo no existe y el nodo está a la derecha, lo insertamos en el lado derecha.
       current_node->right = node_insert;
     }
   }
@@ -101,7 +101,7 @@ public:
     }
     else
     {
-      // Insert the first node, if root is NULL.
+      // Inserta el primer nodo, si la raíz es NULL.
       this->root = node_insert;
     }
   }
@@ -137,7 +137,7 @@ public:
   {
     if (!current_node)
       return NULL;
-    // First search for the element to delete
+    // Busca el elemento a eliminar
     else if (key_delete < current_node->key)
     {
       current_node->left = this->delete_node(current_node->left, key_delete);
@@ -150,30 +150,27 @@ public:
     {
       if (!current_node->left && !current_node->right)
       {
-        // If the node is a leaf we just delete it
+        // Si el nodo es una hoja, se elimina.
         delete current_node;
         current_node = NULL;
       }
       else if (!current_node->left)
       {
-        // If the node doesn't have left node,
-        // then just replace the current node with the right root
+        // Si el nodo no tiene un nodo izquierdo, se reemplaza el nodo actual con la raíz derecha
         Node<T> *right_node = current_node->right;
         delete current_node;
         current_node = right_node;
       }
       else if (!current_node->right)
       {
-        // If the node doesn't have right node,
-        // then just replace the current node with the left root
+        // Si el nodo no tiene el nodo correcto, se reemplaza el nodo actual con la raíz izquierda
         Node<T> *left_node = current_node->left;
         delete current_node;
         current_node = left_node;
       }
       else
       {
-        // If the node to delete has both nodes
-        // We search the minimum element in the right side
+        // Si el nodo a eliminar tiene ambos nodos, se busca el elemento mínimo en el lado derecho
         Node<T> *successor = this->minimum_element(current_node->right);
         // Replace the data with the minimum element (also the key)
         Node<T> *new_node_minimum = new Node<T>(
@@ -185,10 +182,10 @@ public:
           this->root = new_node_minimum;
         }
 
-        // Delete the current node
+        // Elimina el nodo actual
         delete current_node;
 
-        // Now we recursively delete the minimum element in the right subtree
+        // Ahora se elimina de forma recursiva el elemento mínimo en el subárbol derecho
         current_node = new_node_minimum;
         current_node->right = this->delete_node(current_node->right, successor->key);
       }
@@ -207,18 +204,11 @@ void leerArchivo(string nombreArchivo, vector<string> &bitacora)
 {
   ifstream archivo(nombreArchivo.c_str());
   string linea;
+  // Obtiene la  línea de archivo, y la almacena el contenido en "linea"
 
   while (getline(archivo, linea))
   {
-    /*
-    // Se imprime
-    if (linea == "\n")
-    {
-      break;
-    }
-    else
-    {
-    */
+
     bitacora.push_back(linea);
     //}
   }
@@ -269,19 +259,6 @@ vector<string> dividir(string str, char pattern)
   }
 
   return results;
-}
-
-void pruebaError(vector<vector<string>> a, int i)
-{
-  vector<string> prueba;
-  if (i < a.size())
-  {
-    prueba = a[i];
-  }
-  else
-  {
-    throw invalid_argument(" ");
-  }
 }
 
 // Convierte las ip´s a lista.
@@ -344,28 +321,9 @@ vector<string> convertirIPS4(vector<string> lista)
   return lista;
 }
 
-// Utilizamos busqueda secuencial de arreglos ordenados para encontrar las fechas en específico dentro del vector.
-// Complejidad: Mejor O(1), Promedio O(n/2), Peor O(n)
-int busqSecuencialOrd(vector<string> a, float k)
-{
-  int n = a.size();
-  for (int i = 0; i < n; i++)
-  {
-    if (k <= (stol(a[i])))
-    {
-      if (k == (stol(a[i])))
-      {
-        return i;
-      }
-      else
-      {
-        return -1;
-      }
-    }
-  }
-  return -1;
-}
-
+// Buscar con la busqueda secuencial un dato entero dentro del vector.
+// Complejidad: O(n)
+// Valor de retorno: El índice donde se encuentra el dato o -1 en caso de que no se localice.
 int busquedaSecuencial(vector<string> arreglo, long buscar)
 {
   int izq = 0;
@@ -380,7 +338,6 @@ int busquedaSecuencial(vector<string> arreglo, long buscar)
     if (stol(arreglo[izq]) == buscar)
     {
       pos = izq;
-      cout << "\n\nBusqueda Secuencial: \nElemento encontrado en el arreglo en la posición: " << pos << endl;
       return pos;
     }
 
@@ -388,7 +345,6 @@ int busquedaSecuencial(vector<string> arreglo, long buscar)
     if (stol(arreglo[der]) == buscar)
     {
       pos = der;
-      cout << "\n\nBusqueda Secuencial: \nElemento encontrado en el arreglo en la posición: " << pos << endl;
       return pos;
     }
     izq++;
@@ -396,14 +352,13 @@ int busquedaSecuencial(vector<string> arreglo, long buscar)
   }
 
   // Si no se encuentra el elemento retorna -1.
-  if (pos == -1)
-  {
-    cout << "\nBusqueda Secuencial:\n-1 Elemento no encontrado en el arreglo" << endl;
-  }
   return pos;
 }
 
-int busqueda_Binaria(vector<string> a, long k) // Complejidad de O(logn)
+// Buscar con la busqueda binaria un dato entero dentro del vector.
+// Complejidad: O(log n).
+// Valor de retorno: El índice donde se encuentra el dato o -1 en caso de que no se localice.
+int busqueda_Binaria(vector<string> a, long k)
 {
   int n = a.size();
   int l = 0;
@@ -411,10 +366,12 @@ int busqueda_Binaria(vector<string> a, long k) // Complejidad de O(logn)
   while (l <= r)
   {
     int m = floor((l + r) / 2);
+    // Busca si el elemento esta en el medio.
     if (k == stol(a[m]))
     {
       return m;
     }
+    // Si el elemento es mas pequeño que el de en medio
     else if (k < stol(a[m]))
     {
       r = m - 1;
@@ -424,10 +381,11 @@ int busqueda_Binaria(vector<string> a, long k) // Complejidad de O(logn)
       l = m + 1;
     }
   }
+  // Cuando no encuentra el numero se retorna -1
   return -1;
 }
 
-// Imprime cada linea del vector.
+// Imprime cada linea del vector string.
 void printVector(vector<string> a)
 {
   int n = a.size();
@@ -438,6 +396,7 @@ void printVector(vector<string> a)
   cout << endl;
 }
 
+// Imprime cada linea del vector entero.
 void printVectorInt(vector<int> a)
 {
   int n = a.size();
@@ -451,18 +410,18 @@ void printVectorInt(vector<int> a)
 int mayor(vector<int> v) // v contiene la direccion de inicio del vector
 {
   int mayor;
-  mayor = v[0]; // tomamos el primer elemento como mayor
-  // bv++;        //avanzamos hasta el segundo elemento del vector
+  // Tomamos el primer elemento como mayor
+  mayor = v[0];
+  // Avanzamos hasta el segundo elemento del vector
   for (int i = 1; i < v.size(); i++)
   {
     if (v[i] > mayor) // si el elemento actual es mayor que el mayor actual
     {
       mayor = v[i]; // se toma como mayor
     }
-    // v++; //siguiente elemento del vector
   }
-
-  return mayor; // se devuelve el mayor
+  // Devuelvd el mayor
+  return mayor;
 }
 
 int main()
@@ -482,19 +441,14 @@ int main()
   cout << "Compilando..." << endl;
   leerArchivo("BitacoraResultado.txt", bitacora);
 
-  vectorSeparado = separar(bitacora); // ip se encuentra en el indice 3
+  vectorSeparado = separar(bitacora); // Ip se encuentra en el indice 3
   cout << "Leyendo archivo..." << endl;
-  for (int i = 0; i < vectorSeparado.size(); i++)
-  {
-    cout << vectorSeparado[i][3] << endl;
-  }
-  cout << "Pasa impresión" << endl;
-  vectorConvertido = convertirIPS(vectorSeparado, posiciones);
-  cout << "Pasa IPS1" << endl;
-  vectorConvertido = convertirIPS2(vectorConvertido);
-  cout << "Pasa IPS2" << endl;
 
-  // Guardar ip que se repiten
+  vectorConvertido = convertirIPS(vectorSeparado, posiciones);
+
+  vectorConvertido = convertirIPS2(vectorConvertido);
+
+  // Guarda las ip´s que se repiten
   for (int i = 0; i < vectorSeparado.size(); i++) //-1
   {
 
@@ -502,96 +456,76 @@ int main()
     {
       continue;
     }
-
     else
     {
       if (vectorSeparado[i][3] == vectorSeparado[i - 1][3])
       {
-        cout << "encuentra ip que se repite: " << vectorSeparado[i][3] << endl;
+
         iptemp = vectorSeparado[i][3];
         counter++;
         if (i == vectorSeparado.size() - 1)
         {
           if (counter > 1)
           {
-            cout << "Inserta ip que se repite: " << counter << " veces: " << vectorSeparado[i][3] << endl;
+
             ipLista.push_back(iptemp);
             counterLista.push_back(counter);
-            // cout<<iptemp<<" se repitio: "<<to_string(counter)<<endl;
           }
           counter = 1;
-          cout << vectorSeparado[i][3] << endl;
         }
       }
       else
       {
         if (counter > 1)
         {
-          cout << "Inserta ip que se repite: " << counter << " veces: " << vectorSeparado[i][3] << endl;
+
           ipLista.push_back(iptemp);
           counterLista.push_back(counter);
-          // cout<<iptemp<<" se repitio: "<<to_string(counter)<<endl;
         }
         counter = 1;
-        cout << vectorSeparado[i][3] << endl;
       }
     }
   }
-  cout << "Salgo de contar ips" << endl;
 
   ipLista = convertirIPS3(ipLista, posicionesIp);
-  cout << "Pasa IPS3" << endl;
+
   ipLista = convertirIPS4(ipLista);
-  cout << "Pasa IPS4" << endl;
 
-  for (int i = 0; i < ipLista.size(); i++)
-  {
-    cout << ipLista[i] << " : " << counterLista[i] << endl;
-  }
-
+  //  Busca las ip´s que se repiten en la lista de vector separado para insertarlas en bst
   for (int i = 0; i < vectorSeparado.size(); i++)
   {
-    cout << endl
-         << vectorConvertido[i][3] << endl;
+
     int encuentra = busquedaSecuencial(ipLista, stol(vectorConvertido[i][3]));
-    cout << "Encuentra indice: " << encuentra << endl;
     bool condicion;
+    // En caso de que las encuentre.
     if (encuentra >= 0)
     {
       condicion = true;
-      cout << "Encuentra: Si" << endl;
     }
+    // En caso de que no las encuentre.
     else
     {
       condicion = false;
-      cout << "Encuentra: No" << endl;
     }
     if (condicion)
     {
       if (i - 1 == -1)
       {
-        cout << endl;
+
         bst.insert(vectorSeparado[i][3], counterLista[encuentra]);
-        cout << "Ip que se repite: " << vectorSeparado[i][3] << endl;
-        cout << ipLista[encuentra] << endl;
-        cout << endl;
       }
       else
       {
         if (vectorSeparado[i][3] != vectorSeparado[i - 1][3])
         {
-          cout << endl;
+
           bst.insert(vectorSeparado[i][3], counterLista[encuentra]);
-          cout << "Ip que se repite: " << vectorSeparado[i][3] << endl;
-          cout << ipLista[encuentra] << endl;
-          cout << endl;
         }
       }
     }
     else
     {
       bst.insert(vectorSeparado[i][3], 1);
-      cout << vectorSeparado[i][3] << endl;
     }
   }
 
@@ -609,16 +543,9 @@ int main()
     cont++;
     copiaCounter.erase(std::remove(copiaCounter.begin(), copiaCounter.end(), max), copiaCounter.end());
   }
-  printVectorInt(top5);
-
-  bst.inorder(bst.root);
   cout << endl;
 
-  // Node<string>* prueba = bst.search(top5[0]);
-  // string valor = prueba->data;
-  // cout<<valor;
-
-  // Imprime el Top 5 ip que mas se repiten
+  // Imprime las 5 ip´s que mas se repiten.
   cout << "--------- TOP 5 IP ---------" << endl;
   for (int i = 0; i < top5.size(); i++)
   {
