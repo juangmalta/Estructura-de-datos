@@ -28,7 +28,7 @@ int chainHashing(string nombre)
 }
 int quadindex()
 {
-	cuadindex = pow(cuadindex,2);
+	cuadindex = pow(cuadindex, 2);
 	return cuadindex;
 }
 
@@ -36,7 +36,7 @@ void cuadraticHashing(vector<string> &hash, string palabra)
 {
 	int index = quadindex();
 	hash[index] = palabra;
-	cout<<index<<endl;
+	cout << index << endl;
 }
 
 void chain(vector<string> &hash, string palabra)
@@ -69,14 +69,14 @@ int main()
 	vector<string> hashtable(1000); // Para guardar 10000 elementos
 	chain(hashtable, "Alexa");
 	chain(hashtable, "Carlos");
-	cout << exist(hashtable, "Alexa")<<endl;
+	cout << exist(hashtable, "Alexa") << endl;
 	vector<string> hashtable2(1000);
-	cuadraticHashing(hashtable2,"Hola");
-	cout<<hashtable2[cuadindex]<<endl;
-	cuadraticHashing(hashtable2,"Buenas");
-	cout<<hashtable2[cuadindex]<<endl;
-	cuadraticHashing(hashtable2,"Tardes");
-	cout<<hashtable2[cuadindex]<<endl;
+	cuadraticHashing(hashtable2, "Hola");
+	cout << hashtable2[cuadindex] << endl;
+	cuadraticHashing(hashtable2, "Buenas");
+	cout << hashtable2[cuadindex] << endl;
+	cuadraticHashing(hashtable2, "Tardes");
+	cout << hashtable2[cuadindex] << endl;
 
 	return 0;
 }
