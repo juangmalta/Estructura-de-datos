@@ -1,9 +1,9 @@
-//Programa que almacena datos en un vector, ordena la información y lo almacena en un nuevo archivo.
-//Autores: David Román Velasco A01639645
-//Paulina Lizet Gutiérrez Amezcua A01639948,
-//Juan Pablo García Malta A01639025
-//Fecha de creación: 9 de septiembre del 2021
-//Act 1.3 - Actividad Integral de Conceptos Básicos y Algoritmos Fundamentales.
+// Programa que almacena datos en un vector, ordena la información y lo almacena en un nuevo archivo.
+// Autores: David Román Velasco A01639645
+// Paulina Lizet Gutiérrez Amezcua A01639948,
+// Juan Pablo García Malta A01639025
+// Fecha de creación: 9 de septiembre del 2021
+// Act 1.3 - Actividad Integral de Conceptos Básicos y Algoritmos Fundamentales.
 
 #include <iostream>
 #include <vector>
@@ -49,7 +49,7 @@ vector<vector<string>> separar(vector<string> &bitacora)
     vectorTemp.push_back(s);
     bitacoraAcomodada.push_back(vectorTemp);
   }
-  //cout << bitacoraAcomodada[4][3] << endl;
+  // cout << bitacoraAcomodada[4][3] << endl;
   return bitacoraAcomodada;
 }
 
@@ -78,10 +78,10 @@ vector<vector<string>> convertirNumeros(vector<vector<string>> vector)
 {
   for (int i = 0; i < vector.size(); i++)
   {
-    //Convertimos los meses en números.
+    // Convertimos los meses en números.
     if (vector[i][0] == "Jan")
     {
-      //Multiplicamos por 100000000 para generar un id unico para cada fecha.
+      // Multiplicamos por 100000000 para generar un id unico para cada fecha.
       vector[i][0] = "100000000";
     }
     else if (vector[i][0] == "Feb")
@@ -142,7 +142,7 @@ vector<vector<string>> convertirMeses(vector<vector<string>> vector)
 {
   for (int i = 0; i < vector.size(); i++)
   {
-    //Se convierte el mes de nuevo en su abreviatura para facilitar su lectura.
+    // Se convierte el mes de nuevo en su abreviatura para facilitar su lectura.
     if (vector[i][0] == "100000000")
     {
       vector[i][0] = "Jan";
@@ -209,7 +209,7 @@ vector<vector<string>> convertirHoras(vector<vector<string>> lista)
   for (int i = 0; i < lista.size(); i++)
   {
     vectorTemp = dividir(lista[i][2], ':');
-    suma = ((stoi(vectorTemp[0])) * 10000) + ((stoi(vectorTemp[1])) * 100) + stoi(vectorTemp[2]); //así como la hora y el dia para crear un id unico para cada fecha
+    suma = ((stoi(vectorTemp[0])) * 10000) + ((stoi(vectorTemp[1])) * 100) + stoi(vectorTemp[2]); // así como la hora y el dia para crear un id unico para cada fecha
     // Se utiliza dar formato y evitar errores al buscar una fecha específica.
     if ((stoi(vectorTemp[0]) < 10) && (stoi(vectorTemp[0]) != 0))
     {
@@ -250,7 +250,7 @@ vector<vector<string>> ordenBurbuja(vector<vector<string>> a)
   {
     for (int j = 0; j < n - i - 1; j++)
     {
-      if ((stoi(a[j][0]) + stoi(a[j][1]) * 1000000 + stoi(a[j][2])) > (stoi(a[j + 1][0]) + stoi(a[j + 1][1]) * 1000000 + stoi(a[j + 1][2]))) //se usa el id que creamos para buscar el valor
+      if ((stoi(a[j][0]) + stoi(a[j][1]) * 1000000 + stoi(a[j][2])) > (stoi(a[j + 1][0]) + stoi(a[j + 1][1]) * 1000000 + stoi(a[j + 1][2]))) // se usa el id que creamos para buscar el valor
       {
         vector<string> tmp_value = a[j];
         a[j] = a[j + 1];
@@ -283,7 +283,7 @@ int busqSecuencialOrd(vector<vector<string>> a, int k)
   return -1;
 }
 
-//Imprime cada linea del vector.
+// Imprime cada linea del vector.
 void printVector(vector<string> a)
 {
   int n = a.size();
@@ -307,7 +307,7 @@ int main()
   int fecha2;
   int indice1 = -1;
   int indice2 = -1;
-  cout<<"Compilando..."<<endl;
+  cout << "Compilando..." << endl;
   leerArchivo("bitacora.txt", bitacora);
   // cout << bitacora[2] << endl;
   vectorSeparado = separar(bitacora);
@@ -321,33 +321,33 @@ int main()
   vectorOrdenado = ordenBurbuja(vectorConvertido);
   // printVector(vectorOrdenado[2]);
 
-  cout << "Ingresa el mes de inicio (numero de mes): "; //Se ingresa el primer valor a buscar.
+  cout << "Ingresa el mes de inicio (numero de mes): "; // Se ingresa el primer valor a buscar.
   cin >> mes;
   cout << endl
        << "Ingresa el día de inicio: ";
   cin >> dia;
   fecha1 = ((mes)*100000000) + (dia);
   cout << endl
-       << "Ingresa el mes de fin (numero de mes): "; //Se ingresa el ultimo valor a imprimir.
+       << "Ingresa el mes de fin (numero de mes): "; // Se ingresa el ultimo valor a imprimir.
   cin >> mes;
   cout << endl
        << "Ingresa el día de fin: ";
   cin >> dia;
   if (dia != 31)
   {
-    fecha2 = (mes * 100000000) + (dia + 1); //Se transforma la entrada del usuario en un id.
+    fecha2 = (mes * 100000000) + (dia + 1); // Se transforma la entrada del usuario en un id.
   }
   else
   {
     fecha2 = ((mes + 1) * 100000000) + 1;
   }
-  //Se guardan ambas fechas para buscarlas después.
+  // Se guardan ambas fechas para buscarlas después.
   indice1 = busqSecuencialOrd(vectorOrdenado, fecha1);
   indice2 = busqSecuencialOrd(vectorOrdenado, fecha2);
   while ((indice1 == -1) || (indice2 == -1))
   {
     cout << endl
-         << "Fechas no validas, reingrese fechas" << endl; //En caso de no encontrar la fecha.
+         << "Fechas no validas, reingrese fechas" << endl; // En caso de no encontrar la fecha.
     cout << "Ingresa el mes de inicio (numero de mes): ";
     cin >> mes;
     cout << endl
@@ -373,7 +373,7 @@ int main()
     indice1 = busqSecuencialOrd(vectorOrdenado, fecha1);
     indice2 = busqSecuencialOrd(vectorOrdenado, fecha2);
   }
-  //Se regresan los valores a su formato original para facilitar lectura
+  // Se regresan los valores a su formato original para facilitar lectura
   vectorOrdenado = convertirMeses(vectorOrdenado);
   vectorOrdenado = desconvertirHoras(vectorOrdenado);
 
@@ -386,7 +386,7 @@ int main()
   ofstream bitacoraOrdenada;
 
   // Apertura y comprobación
-  if (std::ofstream bitacoraOrdenada{"BitacoraResultado.txt"}) //Se guarda el resultado en un archivo de texto
+  if (std::ofstream bitacoraOrdenada{"BitacoraResultado.txt"}) // Se guarda el resultado en un archivo de texto
   {
     for (int i = indice1; i <= indice2 - 1; i++)
     {
@@ -399,7 +399,7 @@ int main()
   }
   else
   {
-    cout << "Error al intentar abrir el archivo BitacoraResultado" << endl; //En caso de error.
+    cout << "Error al intentar abrir el archivo BitacoraResultado" << endl; // En caso de error.
   }
   bitacoraOrdenada.close();
 }

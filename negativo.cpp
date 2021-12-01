@@ -2,8 +2,9 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
   int a = -3;
-  cout<<a;
+  cout << a;
   return 0;
 }
