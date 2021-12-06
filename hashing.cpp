@@ -3,7 +3,6 @@
 #include <string>
 #include <math.h>
 using namespace std;
-
 int cuadindex = 2;
 
 int convertToASCII(string letter)

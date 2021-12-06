@@ -620,9 +620,7 @@ int main()
 
   // Imprime el Top 5 ip que mas se repiten
   cout << "--------- TOP 5 IP ---------" << endl;
-  for (int i = 0; i < top5.size(); i++)
-  {
-    cout << bst.search(top5[i])->data << " : " << top5[i] << " veces." << endl;
+  
   }
 
   return 0;
